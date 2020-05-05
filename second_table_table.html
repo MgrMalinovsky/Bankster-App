@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <html lang="us">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/smoothness/jquery-ui.min.css" />
+        <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+        <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+        <script src = "js/authenticate.js" ></script>
+        <link href="jquery-ui.css" rel="stylesheet">
+    </head>
+<body>
+<div data-role="page" id="secondtableresult">
+
+    <div data-role="header">
+        <h1>Payments table(Page Three)</h1>
+        <a href="#" data-rel="back" data-iconpos="notext" data-icon="back">Back</a>
+    </div>
+
+    <div data-role="content">
+
+
+        <button id="getTable">Get Table</button><br/>
+
+        <a href="#pagetwo" class="ui-btn">Post a New Account to Firebase</a>
+
+
+        <button id="clearPersonalDetailsButton" type="button">Clear Details</button>
+
+        <table data-role="table" class="ui-responsive" id="myTable">
+
+            <thead>
+
+            <tr>
+
+                <th>Amount</th>
+                <th>date</th>
+                <th>Account</th>
+
+            </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+
+        </table>
+    </div>
+
+    <div data-role="footer">
+        <h2>Bankster</h2>
+    </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCwQAIB-rnI0ezr36neawtfsj9g3pDAgEA",
+        authDomain: "bankster.firebaseapp.com",
+        databaseURL: "https://bankster.firebaseio.com",
+        projectId: "bankster",
+        storageBucket: "",
+        messagingSenderId: "331507568627"
+    };
+    firebase.initializeApp(config);
+</script>
+
+<script>
+
+    var fb = new Firebase("https://bankster.firebaseio.com"),
+        fbMessages = fb.child("/payments");
+
+
+        document.getElementById('getTable').addEventListener('click', function getTable(amount, date, account) {
+
+             var rootRef = firebase.database().ref().child("payments");
+
+            rootRef.on("child_added", snap => {
+
+                var amount = snap.child("amount").val();
+                var date = snap.child("date").val();
+                var account = snap.child("account").val();
+
+            $("#myTable tbody").append("<tr><td>" + amount + "</td><td>" + date + "</td><td>" + account + "</td></tr>");
+
+               });
+            });
+
+
+            document.getElementById('clearPersonalDetailsButton').addEventListener('click', function() {
+                clearPersonalDetails();
+            });
+
+            function clearPersonalDetails() {
+                amount.value = "";
+                date.value = "";
+                account.value = "";
+
+             $("#myTable tbody").empty("<tr><td>" + amount + "</td><td>" + date  + "</td><td>" + account + "</td></tr>");
+
+            };
+        console.log('I just ran');
+    </script>
+</body>
+</html>

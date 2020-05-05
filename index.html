@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<html lang="us">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+		<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+		<link rel="stylesheet" href="themes/Bankster1.min.css" />
+		<link rel="stylesheet" href="themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile.structure-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	</head>
+<body>
+
+<div data-role="page" id="entry">
+
+	<div data-role="header">
+		<h1>Welcome To My Homepage</h1>
+	</div>
+
+	<div data-role="main" class="ui-content">
+		<p>Welcome!</p>
+
+		<a href="#home" class="ui-btn">Authenticate</a>
+
+	</div>
+
+	<div data-role="footer">
+		<h1>Bankster</h1>
+
+	</div>
+
+</div>
+
+<div data-role="page" id="home">
+	<div data-role="panel" id="myPanel"> 
+		<h2>App Instructions</h2>
+		<p>Instructions on how to use this app.</p>
+		<a href="#home" data-rel="close" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left">
+		Close panel</a>
+	</div> 
+ 
+	<div data-role="header">
+		<h1>Welcome To My Bank app (page one)</h1>
+	</div>
+
+    <div data-role="main" class="ui-content">
+        <p>Welcome!</p>
+        <a href="#pagetwo" class="ui-btn">Post a New bank Account to Firebase</a>
+        <a href="#pagethree" class="ui-btn">Check your accounts in Firebase</a>
+		<a href="#secondtable" class="ui-btn">Post your payments online</a>
+		<a href="#secondtableresult" class="ui-btn">Check your accounts in Firebase</a>
+    </div>
+	
+	<div data-role="footer">
+		<h1>Logging options</h1>
+
+		<a href="#myPopup" data-rel="popup" class="ui-btn ui-corner-all ui-icon-delete ui-btn-left data-left=">About this app.</a>
+
+		<div data-role="popup" id="myPopup" class="ui-content" data-overlay-theme="b">
+		      <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+			<p>Click on the button below to see how to use this app.</p>
+				<a href="#myPanel" class="ui-btn ui-btn-inline">App user instructions.</a>
+		</div>
+		<div data-role="content">
+
+			<input type='email' id='txtEmail' placeholder='Valid Email Address'/>
+
+			<input type='text' id='txtPassword' placeholder='Valid Password'/>
+
+			<button id="btnLogin"> Log in </button>
+
+			<button id="btnSignup"> Sign up </button>
+
+			<button id="btnLogout"> Log out </button>
+
+			<button id="btnAnonymous"> Anonymous Log In</button>
+
+		</div>
+
+	</div>
+	
+</div>	
+
+<div data-role="page" id="pagetwo">
+  
+	<div data-role="header">
+		<h1>Adding account(Page Two)</h1>
+			<a href="#" data-rel="back" data-iconpos="notext" data-icon="back">Back</a>
+	</div>
+
+	<div data-role="content">
+        
+        <h1>Test Data-Store</h1>
+			<label for="name">Name for account(saving, basic etc.):</label><br/><input type="text" id="name"/><br/>
+			<label for="bank">Name of bank:</label><br/>
+			<textarea id="bank" cols="60" rows="10"></textarea><br/>
+			
+            <label for="platform">Platform:</label><br/>
+			<select id="platform" name="platform">
+				<option value="Android">Android</option>
+				<option value="iOS">iOS</option>
+				<option value="Website">Website</option>
+			</select>
+			
+			<label for="country">Country:</label><br/>
+            <select id="country" name="country">
+				<option value="Scotland">Scotland</option>
+				<option value="England">England</option>
+                <option value="Ireland">Ireland</option>
+				<option value="Wales">Wales</option>
+				<option value="Germany">Germany</option>
+			</select>
+			<button id="post">Add Account</button><br/>
+    
+			<ul id="banks"></ul>
+        
+	</div>
+
+	<div data-role="footer">
+		<h2>Page Two Footer</h2>
+	</div>
+  
+</div> 
+
+<div data-role="page" id="pagethree">
+  
+	<div data-role="header">
+		<h1>Accounts table(Page Three)</h1>
+				<a href="#" data-rel="back" data-iconpos="notext" data-icon="back">Back</a>
+	</div>
+
+	<div data-role="content">
+	
+					
+		<button id="getTable">Get Table</button><br/>
+     
+        <a href="#pagetwo" class="ui-btn">Post a New Account to Firebase</a>
+        
+   
+        <button id="clearPersonalDetailsButton" type="button">Clear Details</button>
+     
+        <table data-role="table" class="ui-responsive" id="myTable"> 
+		
+			<thead>
+		
+				<tr>
+
+                    <th>Country</th>
+                    <th>bank</th>
+                    <th>Name</th>
+                    <th>Platform</th>
+
+				</tr>
+			</thead>
+			
+		<tbody>
+
+		</tbody>
+		
+		</table>
+	</div>
+
+	<div data-role="footer">
+		<h2>Bankster</h2>
+	</div>
+  
+</div>
+
+<div data-role="page" id="secondtable">
+	<div data-role="header">
+		<h1>Payment Page</h1>
+		<a href="#" data-rel="back" data-iconpos="notext" data-icon="back">Back</a>
+	</div>
+
+	<div data-role="content">
+
+		<h1>Update your payments!</h1>
+
+		<label for="amount">Amount of transfer(in GBP):</label><br/><input type="text" id="amount"/><br/>
+		<label for="date">Date of Payment(dd.mm.yy):</label><br/>
+		<textarea id="date" cols="60" rows="10"></textarea><br/>
+
+
+		<label for="account">Account:</label><br/>
+		<select id="account" name="account">
+			<option value="RBS">RBS</option>
+			<option value="Bank of Scotland">Bank of Scotland</option>
+			<option value="Santander">Santander</option>
+			<option value="NatWest">NatWest</option>
+			<option value="Barclays">Barclays</option>
+		</select>
+		<button id="post1">Update your transfer to database</button><br/>
+
+		<ul id="payments"></ul>
+
+	</div>
+
+	<div data-role="footer">
+		<h2>Bankster</h2>
+	</div>
+
+</div>
+
+
+<div data-role="page" id="secondtableresult">
+
+	<div data-role="header">
+		<h1>Payments table(Page Three)</h1>
+		<a href="#" data-rel="back" data-iconpos="notext" data-icon="back">Back</a>
+	</div>
+
+	<div data-role="content">
+
+
+		<button id="getTable1">Get Table</button><br/>
+
+		<a href="#secondtable" class="ui-btn">Post new payments to Firebase</a>
+
+
+		<button id="clearPersonalDetailsButton1" type="button">Clear Details</button>
+
+		<table data-role="table" class="ui-responsive" id="myTable1">
+
+			<thead>
+
+			<tr>
+
+				<th>Amount</th>
+				<th>date</th>
+				<th>Account</th>
+
+			</tr>
+			</thead>
+
+			<tbody>
+
+			</tbody>
+
+		</table>
+	</div>
+
+	<div data-role="footer">
+		<h2>Bankster</h2>
+	</div>
+
+</div>
+
+    
+
+<script src="https://www.gstatic.com/firebasejs/5.8.1/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyCwQAIB-rnI0ezr36neawtfsj9g3pDAgEA",
+    authDomain: "bankster.firebaseapp.com",
+    databaseURL: "https://bankster.firebaseio.com",
+    projectId: "bankster",
+    storageBucket: "",
+    messagingSenderId: "331507568627"
+  };
+  firebase.initializeApp(config);
+</script>
+	
+<script>
+     
+	var fb = new Firebase("https://bankster.firebaseio.com"),
+			fbMessages = fb.child("/banks");
+
+	nameElement = document.getElementById('name'),
+			bankElement = document.getElementById('bank'),
+			platformElement = document.getElementById('platform'),
+			countryElement = document.getElementById('country');
+
+	document.getElementById('post').addEventListener('click', function(){
+		var name = nameElement.value,
+				bank = bankElement.value,
+				platform = platformElement.value,
+				country = countryElement.value;
+		if(name && bank && platform && country) {
+			postMessage(name, bank, platform, country);
+		}
+		bankElement.value = "";
+	});
+
+        function postMessage(name, bank, platform, country) {
+            fbMessages.push({
+                name: name,
+				bank: bank,
+                platform: platform,
+                country: country,
+                timestamp: Firebase.ServerValue.TIMESTAMP
+            });
+        }
+
+		document.getElementById('getTable').addEventListener('click', function getTable(name, bank, platform, country) {
+			
+            var rootRef = firebase.database().ref().child("banks");
+
+			rootRef.on("child_added", snap => {
+	
+		      var country = snap.child("country").val();
+		      var bank = snap.child("bank").val();
+		      var name = snap.child("name").val();
+		      var platform = snap.child("platform").val();
+		
+		$("#myTable tbody").append("<tr><td>" + country + "</td><td>" + bank + "</td><td>" + name + "</td><td>" + platform + "</td></tr>");
+		
+            });
+        });
+        
+        
+        document.getElementById('clearPersonalDetailsButton').addEventListener('click', function() {
+            clearPersonalDetails();
+        });
+        
+       function clearPersonalDetails() {
+            country.value = "";
+		    bank.value = "";
+            name.value = "";
+            platform.value = "";
+           
+        $("#myTable tbody").empty("<tr><td>" + country + "</td><td>" + bank + "</td><td>" + name + "</td><td>" + platform + "</td></tr>");
+
+     };
+        
+
+        console.log('I just ran');
+    </script>
+<script>
+
+	var fb = new Firebase("https://bankster.firebaseio.com"),
+			fbMessages = fb.child("/payments");
+
+	amountElement = document.getElementById('amount'),
+			dateElement = document.getElementById('date'),
+			accountElement = document.getElementById('account'),
+
+			document.getElementById('post1').addEventListener('click', function(){
+				var amount = amountElement.value,
+						date = dateElement.value,
+						account = accountElement.value;
+				if(amount && date && account) {
+					postMessage(amount, date, account);
+				}
+				amountElement.value = "";
+			});
+
+	function postMessage(amount, date, account) {
+		fbMessages.push({
+			amount: amount,
+			date: date,
+			account: account,
+			timestamp: Firebase.ServerValue.TIMESTAMP
+		});
+
+	};
+
+	console.log('I just ran');
+</script>
+
+<script>
+
+	var fb = new Firebase("https://bankster.firebaseio.com"),
+			fbMessages = fb.child("/payments");
+
+
+	document.getElementById('getTable1').addEventListener('click', function getTable(amount, date, account) {
+
+		var rootRef = firebase.database().ref().child("payments");
+
+		rootRef.on("child_added", snap => {
+
+			var amount = snap.child("amount").val();
+			var date = snap.child("date").val();
+			var account = snap.child("account").val();
+
+			$("#myTable1 tbody").append("<tr><td>" + amount + "</td><td>" + date + "</td><td>" + account + "</td></tr>");
+
+		});
+	});
+
+
+	document.getElementById('clearPersonalDetailsButton1').addEventListener('click', function() {
+		clearPersonalDetails();
+	});
+
+	function clearPersonalDetails() {
+		amount.value = "";
+		date.value = "";
+		account.value = "";
+
+		$("#myTable1 tbody").empty("<tr><td>" + amount + "</td><td>" + date  + "</td><td>" + account + "</td></tr>");
+
+	};
+	console.log('I just ran');
+</script>
+</body>
+</html>
