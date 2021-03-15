@@ -8,4 +8,4 @@ You can add an "example" bank account and virtually manage funds on that. Everyt
 
 ## Stack
 
-jQuery, JS, CSS
+jQuery, JS, CSS, Firebase
