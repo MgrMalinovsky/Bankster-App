@@ -1,6 +1,8 @@
 # Bankster-App
 jQuery application for University assessment
 
+Warining: in development process
+
 ## Description
 
 Bankster app is a simple website working with Firebase and jQuery. 
